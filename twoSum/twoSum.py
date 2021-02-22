@@ -6,24 +6,23 @@ If no two numbers sum to the target sum, then return an empty array. You can't a
 array = [3, 5, -4, 8, 11, 1, -1, 6]
 targetSum = 10
 
-#Solution 1
+# Solution 1
 def twoNumSum2(array, targetSum):
     for i, num1 in enumerate(array):
-        for k, num2 in enumerate(array[i+1:]):
+        for k, num2 in enumerate(array[i + 1 :]):
             if num1 + num2 == targetSum:
                 return [array[array.index(num1)], array[array.index(num2)]]
     return []
 
-#Solution 2
+
+# Solution 2
 def twoNumSum3(array, targetSum):
 
-    index_nums = { num: i for i, num in enumerate(array)}
+    index_nums = {num: i for i, num in enumerate(array)}
 
     for i, num in enumerate(array):
-        diff = targetSum - num 
+        diff = targetSum - num
         if diff in index_nums and diff + num == targetSum and num != diff:
             return [diff, num]
 
     return []
-
-
