@@ -3,11 +3,6 @@ https://www.algoexpert.io/questions/Run-Length%20Encoding
 """
 
 
-#string = "1  222 333    444  555"
-#string = "AAAAAAAAAAAAABBCCCCDD"
-string = "ABB"
-
- 
 def parse_given_string(string):
     parsed_string = []
 
@@ -16,18 +11,19 @@ def parse_given_string(string):
     while p2 < len(string):
         start_char = string[p1]
         next_char = string[p2]
+        length_of_nine = p2 - p1 == 9
 
-        if start_char == next_char:
+        if length_of_nine:
+            parsed_string.extend(["9", start_char])
+            p1, p2 = p2, p2 + 1
+
+        elif start_char == next_char:
             p2 += 1
 
         else:
-            char_count =  p2 - p1 
-            parsed_string.extend([char_count, start_char])
-            p1 = p2
-            p2 = p1 + 1
+            char_count = p2 - p1
+            parsed_string.extend([str(char_count), start_char])
+            p1, p2 = p2, p2 + 1
     if p1 < p2:
-        #import pdb; pdb.set_trace()
-        parsed_string.extend([(p2-p1), string[p1]])
-    return parsed_string 
-print(parse_given_string(string))
-
+        parsed_string.extend([str(p2 - p1), string[p1]])
+    return "".join(parsed_string)
