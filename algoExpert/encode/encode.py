@@ -2,29 +2,32 @@
 https://www.algoexpert.io/questions/Run-Length%20Encoding
 """
 
-import re
-string = "A  **(())---         AA880001BB123"
 
-def get_letters(string):
-    return [letter  for letter in string if letter.isalpha()]
+#string = "1  222 333    444  555"
+#string = "AAAAAAAAAAAAABBCCCCDD"
+string = "ABB"
 
-def count_letters(letters):
-    letter_counts = {}
-    for letter in letters:
-        letter_counts[letter] = letter_counts.get(letter, 0) + 1
-    return letter_counts
+ 
+def parse_given_string(string):
+    parsed_string = []
 
+    p1, p2 = 0, 1
 
-def runLengthEncoding(letter_counts):
-    encode_string = []
+    while p2 < len(string):
+        start_char = string[p1]
+        next_char = string[p2]
 
-    for letter, count in letter_counts.items():
-        while count >= 10:
-            encode_string.extend([letter, str(9)])
-            count -= 9
-        encode_string.extend([letter, str(count)])
-    return "".join(encode_string)
+        if start_char == next_char:
+            p2 += 1
 
-letters = get_letters(string)
-counts = count_letters(letters)
-print(runLengthEncoding(counts))
+        else:
+            char_count =  p2 - p1 
+            parsed_string.extend([char_count, start_char])
+            p1 = p2
+            p2 = p1 + 1
+    if p1 < p2:
+        #import pdb; pdb.set_trace()
+        parsed_string.extend([(p2-p1), string[p1]])
+    return parsed_string 
+print(parse_given_string(string))
+
