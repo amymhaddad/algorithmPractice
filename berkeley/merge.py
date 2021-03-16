@@ -3,19 +3,23 @@ Write a procedure merge(n1, n2) which takes numbers with digits in decreasing or
 """
 
 def merge(n1, n2):
-    import pdb; pdb.set_trace()
     if n1 == 0:
         return n1
     elif n2 == 0:
         return n2
 
+    elif n1 > n2:
+        return (n1 // 10 * 10) + merge(n2, n1 % 10)
     else:
-        n1_base = n1 // 10 * 10 
-        n2_base = n2 // 10 * 10
-
-        if n1_base < n2_base:
-            return n1_base + merge(n1 // 10, n2)
-        else:
-            return merge(n1, n2 // 10)
-
+        return (n2 // 10 * 10) + merge(n1, n2 % 10)
 print(merge(31, 42))
+
+def merge_2(n1, n2):
+     if n1 == 0:
+        return n2
+    elif n2 == 0:
+        return n1
+    elif n1 % 10 < n2 % 10:
+        return merge(n1 // 10, n2) * 10 + n1 % 10
+    else:
+        return merge(n1, n2 // 10) * 10 + n2 % 10

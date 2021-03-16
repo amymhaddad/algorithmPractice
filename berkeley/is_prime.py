@@ -3,30 +3,16 @@ Write a function is_prime that takes a single argument n and returns True if n i
 """
 
 def is_prime(num):
-    if num <= 2:
-        return True
 
-    def helper(num, factor):
-        factors = []
-        while factor < num:
-            if num % factor == 0:
-                factors.append(factor)
-            factor += 1
-        return len(factors) == 0
-    return helper(num, 2)
-
-#print(is_prime(521))
-
-def v2_is_prime(num):
-    if num <= 2:
-        return True
-
-    def helper(factor):
-        if num % factor == 0:
-            return False
-        elif factor >= num:
-            return False
+    def helper(possible_factor):
+        if num == possible_factor:
+            return True
+        if possible_factor == num:
+            return True
+        elif num % possible_factor == 0:
+            return False 
         else:
-            return helper(num, factor + 1)
-    helper(2)
-print(is_prime(2))
+            return helper(possible_factor + 1)
+    return helper(2)
+print(is_prime(521))
+
