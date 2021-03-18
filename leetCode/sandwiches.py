@@ -2,18 +2,16 @@
 https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/
 """
 
-
-students = [1,1,0,0]
-sandwiches = [0,1,0,1]
+def hungry_students(students, sandwiches):
+    return (students.count(1) == len(students) or students.count(0) == len(students)) and students[0] != sandwiches[0]
+    
 
 def count_students(students, sandwiches):
-    hungry_students = (students.count(1) == len(students) or students.count(0) == len(students)) and students[0] != sandwiches[0]
-    
     while True:
         if students == []:
             return 0
-        elif hungry_students:
-            return sum(students)
+        elif hungry_students(students, sandwiches):
+            return len(students)
         else:
             if students[0] == sandwiches[0]:
                 students.pop(0)
@@ -22,4 +20,4 @@ def count_students(students, sandwiches):
                 end_queue = students.pop(0)
                 students.append(end_queue)
 
-print(count_students(students, sandwiches))
+# print(count_students(students, sandwiches))
