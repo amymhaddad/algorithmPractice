@@ -23,20 +23,18 @@ def multiply_lnks(lst_of_lnks):
     >>> p.rest.rest.rest is Link.empty
     True
     """
-   # valid = all(ele.rest is Link.empty for ele in lst_of_lnks)
-    #import pdb; pdb.set_trace()
     for ele in lst_of_lnks:
         if ele == Link.empty:
-            return 0
+            return ()
 
     total = 1
     for ele in lst_of_lnks:
         total *= ele.first 
     
-    new_list = []   
+    new_list = []    
     for ele in lst_of_lnks:
         new_list.append(ele.rest)
-    return total + multiply_lnks(new_list)
+    return Link(total, multiply_lnks(new_list))
         
 
 
@@ -44,6 +42,3 @@ a = Link(2, Link(3, Link(5)))
 b = Link(6, Link(4, Link(2)))
 c = Link(4, Link(1, Link(0, Link(2))))
 p = multiply_lnks([a, b, c])
-
-
-print(p)
