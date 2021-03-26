@@ -9,7 +9,7 @@ class Link:
        self.first = first
        self.rest = rest
 
-def flip_two(link):
+def flip_two_iterative(link):
     """
     >>> one_lnk = Link(1)
     >>> flip_two(one_lnk)
@@ -20,47 +20,24 @@ def flip_two(link):
     >>> lnk
     Link(2, Link(1, Link(4, Link(3, Link(5)))))
     """
-    head_node = link 
 
-    while head_node.first is not Link.empty and head_node.rest is not Link.empty:
-        head_node.first, head_node.rest.first = head_node.rest.first, head_node.first 
+    while link is not Link.empty and link.rest is not Link.empty:
+        link.first, link.rest.first = link.rest.first, link.first 
+        link = link.rest.rest 
 
-        head_node = head_node.rest.rest 
 
-    return link
+#Recur sol:
+def flip_two(link):
+    if link is Link.empty or link.rest is Link.empty:
+        return 
+    
+    link.first, link.rest.first = link.rest.first, link.first 
+
+    flip_two(link.rest.rest)
 
 lnk = Link(1, Link(2, Link(3, Link(4, Link(5)))))
-vals = flip_two(lnk)
+flip_two(lnk)
 
-while vals is not Link.empty:
-    print(vals.first)
-    vals = vals.rest 
-
-"""
--Need to check if first val is empty AND if rest is empty
--Swap the elements
--Update the head to SKIP the next value
--Return the given link (which has been mutated)
-
-
-"""
-
-#recur:
-def flip_two_recur(link):
-    head_node = link 
-   # import pdb; pdb.set_trace()
-
-    if link.first is Link.empty or link.rest is Link.empty:
-        return 
-
-
-    head_node.first, head_node.rest.first = head_node.rest.first, head_node.first 
-
-    flip_two(head_node.rest.rest)
-
-  
-
-# lnk = Link(1, Link(2, Link(3, Link(4, Link(5)))))
-# vals = flip_two(lnk)
-
-
+while lnk is not Link.empty:
+    print(lnk.first)
+    lnk = lnk.rest 
