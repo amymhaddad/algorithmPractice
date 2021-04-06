@@ -1,22 +1,26 @@
 """
 https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/928/
 """
-from stack import Stack 
+from stack import Stack
+
 
 class Tree:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
+
+
 root = Tree(1)
 root.left = Tree(2)
 root.right = Tree(3)
 root.right.left = Tree(4)
 root.right.right = Tree(5)
 
+# Sol 1
 def pre(root):
     if root is None:
-        return 
+        return
 
     if root == []:
         return []
@@ -37,4 +41,21 @@ def pre(root):
 
     return results
 
-print(pre(root))
+
+# Sol 2
+def pre_v3(root):
+
+    results = []
+    stack = [root]
+
+    while stack:
+        root = stack.pop()
+
+        if root:
+            results.append(root.val)
+            stack.append(root.right)
+            stack.append(root.left)
+    return results
+
+
+print(pre_v3(root))
