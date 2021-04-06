@@ -13,10 +13,7 @@ root.left = Tree(2)
 root.right = Tree(3)
 root.right.left = Tree(4)
 root.right.right = Tree(5)
-# root.left = Tree(2)
-# root.left.left = Tree(3)
-# root.right = Tree(4)
-#
+
 def pre(root):
     if root is None:
         return 
