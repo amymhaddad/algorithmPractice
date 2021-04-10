@@ -34,16 +34,20 @@ def bfs(root):
     total = []
     head = root 
     level = 0
-    while que:   
+    while True:   
         root = que.pop()
         if root == head:
             total.append(0)
+
+        if not que:
+            level += 1
        
         if root.left is None and root.right is None:
+            
             return sum(total)
         
         else:
-            level += 1
+            #level += 1
             if root.left: 
                 que.appendleft(root.left)
                 total.append(level)
@@ -53,4 +57,5 @@ def bfs(root):
 
    # return total 
 print(bfs(root))
+#Need to move the level -- this should only increment when the que is empty
 
