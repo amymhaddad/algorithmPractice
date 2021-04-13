@@ -18,9 +18,10 @@ root.right = TreeNode(20)
 root.right.left = TreeNode(15)
 root.right.right = TreeNode(7)
 
+
 def level_order(root):
     if root is None:
-        return 
+        return
     if root == []:
         return []
 
@@ -34,7 +35,7 @@ def level_order(root):
     while que:
         node_info = que.pop()
         node_level, val = node_info[0], node_info[1]
-        
+
         if val is None:
             continue
 
@@ -42,11 +43,9 @@ def level_order(root):
             level = node_level
             total_nodes.append(nodes_per_level)
             nodes_per_level = []
-        nodes_per_level.append(val.val) 
-        
-    
-        que.appendleft([level+1, val.left])
-        que.appendleft([level+1, val.right])
+        nodes_per_level.append(val.val)
+        que.appendleft([level + 1, val.left])
+        que.appendleft([level + 1, val.right])
+    if nodes_per_level:
+        total_nodes.append(nodes_per_level)
     return total_nodes
-
-print(level_order(root))
