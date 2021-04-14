@@ -9,19 +9,22 @@ class TreeNode:
         self.left = left
         self.right = right
 
-root = TreeNode(2)
+root = TreeNode(1)
 root.left = TreeNode(1)
-root.right = TreeNode(3)
+
 #root.left.left = TreeNode(3)
 
 def in_order(root):
+    if root is None:
+        return False
     stack = []
     res = []
 
     while True:
-             
         if root:
-            #import pdb; pdb.set_trace()
+            # if root.left and root.right is None or root.right and root.left is None:
+            #     return False
+            import pdb; pdb.set_trace()
             left_node_is_valid = root.left is None or root.val >= root.left.val
             right_node_is_valid = root.right is None or root.val <= root.right.val
             if left_node_is_valid and right_node_is_valid:
