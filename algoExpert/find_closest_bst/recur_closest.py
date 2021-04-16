@@ -1,6 +1,3 @@
-"""
-https://www.algoexpert.io/questions/Find%20Closest%20Value%20In%20BST
-"""
 import math
 
 
@@ -22,25 +19,18 @@ def findClosestValueInBst(tree, target):
     return closest_value(tree_values, target)
 
 
-def get_tree_values(tree, total_values):
-    if tree is None:
-        return
-
-    stack = [(tree, -math.inf, math.inf)]
-
-    while stack:
-        node, lower, upper = stack.pop()
-
+def get_tree_values(node, total_values):
+    def node_values(node, total_values, lower=-math.inf, upper=math.inf):
         if node is None:
-            continue
+            return total_values
+        if node.value >= upper or node.value <= lower:
+            return total_values
+        total_values.append(node.value)
+        return node_values(node.left, total_values, lower, node.value) and node_values(
+            node.right, total_values, node.value, upper
+        )
 
-        val = node.val
-        if val >= upper or val <= lower:
-            continue
-        total_values.append(val)
-        stack.append((node.left, lower, val))
-        stack.append((node.right, val, upper))
-    return total_values
+    return node_values(node, total_values)
 
 
 def closest_value(tree_values, target):
@@ -52,7 +42,6 @@ def closest_value(tree_values, target):
         if prev_difference == None:
             prev_difference = curr_difference
             continue
-
         if curr_difference < prev_difference:
             prev_difference = curr_difference
             smallest_val_so_far = value
