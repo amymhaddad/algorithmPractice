@@ -19,8 +19,8 @@ root.right = TreeNode(3)
 
 def findClosestValueInBst(tree, target):
     total_values = []
-    get_tree_values(tree, total_values)
-    return total_values
+    tree_values = get_tree_values(tree, total_values)
+    return closest_value(tree_values, target)
 
 
 def get_tree_values(tree, total_values):
@@ -43,6 +43,12 @@ def get_tree_values(tree, total_values):
         stack.append((node.right, val, upper))
     return total_values
 
-print(findClosestValueInBst(root, 2))
+def closest_value(tree_values, target):
+    smallest_val_so_far = tree_values[0]
+    for value in tree_values:
+        difference = target - value 
+        if difference < smallest_val_so_far:
+            smallest_val_so_far = difference
+    return smallest_val_so_far
 
-
+print(findClosestValueInBst(root, 4))
