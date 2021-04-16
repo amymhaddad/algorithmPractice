@@ -47,8 +47,32 @@ def closest_value(tree_values, target):
     smallest_val_so_far = tree_values[0]
     for value in tree_values:
         difference = target - value 
+        if difference < 0:
+            continue
         if difference < smallest_val_so_far:
             smallest_val_so_far = difference
     return smallest_val_so_far
 
-print(findClosestValueInBst(root, 4))
+#print(findClosestValueInBst(root, 4))
+
+def closest(tree_values, target):
+    smallest_val_so_far = tree_values[0]
+    prev_difference = None
+
+    for value in tree_values:
+        current_diff = value - target
+        if current_diff < 0:
+            continue
+
+        if prev_difference == None:
+            prev_difference = current_diff
+            continue
+        
+        if current_diff < prev_difference:
+            prev_difference = current_diff
+            smallest_val_so_far = value 
+        #import pdb; pdb.set_trace()
+    return smallest_val_so_far
+
+print(closest([10, 15, 22, 13, 14, 5, 2, 1], 12))
+
