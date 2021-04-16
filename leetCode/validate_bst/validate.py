@@ -1,6 +1,7 @@
 """
 https://leetcode.com/explore/learn/card/introduction-to-data-structure-binary-search-tree/140/introduction-to-a-bst/997/
 """
+import math
 
 
 class TreeNode:
@@ -9,36 +10,37 @@ class TreeNode:
         self.left = left
         self.right = right
 
+
 root = TreeNode(1)
 root.left = TreeNode(1)
 
-#root.left.left = TreeNode(3)
+# Sol 1: recursion
+def validate(root):
+    def is_valid(node, lower=-math.inf, upper=math.inf):
+        if node is None:
+            return True
+        if node.val >= upper or node.val <= lower:
+            return False
+        return is_valid(node.left, lower, node.val) and is_valid(
+            node.right, node.val, upper
+        )
 
-def in_order(root):
-    if root is None:
-        return False
-    stack = []
-    res = []
+    return is_valid(root)
 
-    while True:
-        if root:
-            # if root.left and root.right is None or root.right and root.left is None:
-            #     return False
-            import pdb; pdb.set_trace()
-            left_node_is_valid = root.left is None or root.val >= root.left.val
-            right_node_is_valid = root.right is None or root.val <= root.right.val
-            if left_node_is_valid and right_node_is_valid:
-                stack.append(root)
-                root = root.left 
-            else:
-                return False
 
-        else:
-            if len(stack) == 0:
-                break 
-            root = stack.pop()
-            root = root.right
+# Sol 2: iteration
+def iterative_validation(root):
+    stack = [(root, -math.inf, math.inf)]
+
+    while stack:
+        node, lower, upper = stack.pop()
+        if node is None:
+            continue
+        val = node.val
+
+        if val >= upper or val <= lower:
+            return False
+
+        stack.append((node.left, lower, val))
+        stack.append((node.right, val, upper))
     return True
-
-print(in_order(root))
-
