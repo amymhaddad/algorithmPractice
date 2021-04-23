@@ -9,7 +9,7 @@ class Tree:
         self.left = left
         self.right = right
 
-
+#Recur solution
 def rangeSums(root, low, high):
     total = []
     traverse(root, low, high, total)
@@ -32,15 +32,31 @@ def traverse(root, low, high, total):
     traverse(root.right, low, high, total)
 
 
-def get_range_sums():
-    pass
-
-
 if __name__ == "__main__":
-    get_range_sums()
     root = Tree(1)
     root.left = Tree(2)
     root.left.left = Tree(3)
     root.right = Tree(4)
 
     print(rangeSums(root, 1, 4))
+
+#Iter sol
+def iter_range_sum(root, low, high):
+    stack = [root]
+    res = []
+
+    while stack:
+        node = stack.pop()
+        if node is None:
+            return 
+
+        is_valid = node.value >= low and node.value <= high
+        
+        if is_valid:
+            res.append(node.value)
+
+        if node.left:
+            stack.append(node.left)
+        if node.right:
+            stack.append(node.right)
+    return sum(res)
