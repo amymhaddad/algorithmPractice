@@ -9,26 +9,22 @@ def binary(array, target):
 
     while high - low > 1:
         mid = (high + low) // 2
-
-        #import pdb; pdb.set_trace()
-        if array[mid] >= array[low]:
+        if array[mid] >= target:
             high = mid
+        
         else:
             low = mid 
-
-    import pdb; pdb.set_trace()
-    if array[high] == target:
+    #import pdb; pdb.set_trace() 
+    if mid == high:
+        return low
+    elif array[mid] == target:
         return mid
-    else:
+
+    elif target > high or target < low:
         return -1
-    #import pdb; pdb.set_trace()
-#     if array[mid] == target:
-#         return mid
-#     else:
-#         return -1
-# # arr = [1, 1, 21, 33, 45, 45, 61, 71, 72, 73]
-# target = 33
+#arr = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
+#target = 0
+
 arr = [1, 2, 2, 3, 4]
 target = 2
-
 print(binary(arr, target))
