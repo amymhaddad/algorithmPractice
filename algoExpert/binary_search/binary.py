@@ -15,16 +15,20 @@ def binary(array, target):
         else:
             low = mid 
     #import pdb; pdb.set_trace() 
-    if mid == high:
-        return low
-    elif array[mid] == target:
-        return mid
-
-    elif target > high or target < low:
+    if low == high:
         return -1
-#arr = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
-#target = 0
+    elif array[high] == target:
+        return high
+    else:
+        return -1
 
-arr = [1, 2, 2, 3, 4]
-target = 2
+
+# arr = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
+# target = 0
+
+arr = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
+target = 70
+
+# arr = [1, 2, 2, 3, 4]
+# target = 2
 print(binary(arr, target))
