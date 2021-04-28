@@ -2,9 +2,14 @@
 https://www.algoexpert.io/questions/Find%20Three%20Largest%20Numbers
 """
 
-def find_largest_three_nums(array):
+def findThreeLargestNumbers(array):
+    largest = get_largest_nums(array)
+    return create_sorted_array(largest)
+
+def get_largest_nums(array):
+    
     if len(array) == 3:
-        return sort_array(array)
+        return create_sorted_array(array)
     
     largest_nums = []
 
@@ -13,22 +18,28 @@ def find_largest_three_nums(array):
         index_of_largest = array.index(largest)
         largest_nums.append(largest)
         array.pop(index_of_largest)
-    return sort_array(largest_nums)
+    return largest_nums
 
 
+def find_smallest(array):
+    smallest_index = 0
 
-array = [141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]
-#print(find_largest_three_nums(array))
-
-def sort_arr(array):
-    max_index_so_far = 0
-
-    for i in range(len(array[1:])):
-        if array[i] < array[max_index_so_far]:
-            max_index_so_far = i 
-
-    return max_index_so_far
-
-print(sort_arr([141, 18, 541]))
+    for i in range(1, len(array)):
+        if array[i] < array[smallest_index]:
+            smallest_index = i 
+    return smallest_index 
 
 
+#update var names
+def create_sorted_array(largest):
+
+    new_array = []
+
+    for i in range(len(largest)):
+        index = find_smallest(largest)
+        num = largest.pop(index)
+        new_array.append(num)
+    return new_array
+
+array = [10, 5, 9, 10, 12]
+print(findThreeLargestNumbers(array))
