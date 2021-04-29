@@ -14,16 +14,18 @@ You call a pre-defined API int guess(int num), which returns 3 possible results:
 Return the number that I picked.
 """
 
-def guess(num):
-    low = 1
-    high = num 
 
-    while low <= high:
-        mid = (low + high) // 2
+class Solution:
+    def guessNumber(self, num: int) -> int:
+        low = 1
+        high = num
 
-        if guess(mid) == 0:
-            return mid
-        elif guess(mid) == -1:
-            low = mid + 1
-        else:
-            high = mid - 1
+        while low <= high:
+            mid = (low + high) // 2
+            guess_num = guess(mid)
+            if guess_num == 0:
+                return mid
+            if guess_num == 1:
+                low = mid + 1
+            else:
+                high = mid - 1
