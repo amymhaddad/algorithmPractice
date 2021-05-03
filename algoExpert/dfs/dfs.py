@@ -2,27 +2,20 @@
 https://www.algoexpert.io/questions/Depth-first%20Search
 """
 
-graph = {
-    1: [3, 4, 7],
-    2: [],
-    3: [2],
-    4: [6],
-    5: [],
-    6: [5],
-    7: [],
-}
 
-from collections import deque
-def dfs(graph, root):
- 
+class Node:
+    def __init__(self, name):
+        self.children = []
+        self.name = name
 
-print(dfs(graph, 1))
-#[1, 7, 4, 6, 5, 3, 2]
-#[1, 3, 4, 7, 2, 6, 5]
+    def addChild(self, name):
+        self.children.append(Node(name))
+        return self
 
+    def depthFirstSearch(self, array):
 
-"""
--When at a given node, add that curr node name to the final array
--For each child in its self.children array, call the depthFIrest search function on each child
-
-"""
+        currNode = self.name
+        array.append(currNode)
+        for child in self.children:
+            child.depthFirstSearch(array)
+        return array
