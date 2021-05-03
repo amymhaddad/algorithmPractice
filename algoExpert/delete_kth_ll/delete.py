@@ -15,18 +15,34 @@ def removeKthNodeFromEnd(head, k):
     
     while current is not None:
         que.appendleft(current.value)
-        current = current.value
+        current = current.next
 
     val_to_remove = que.index(k - 1)
 
     while head is not None:
-        if head.next.val == val_to_remove:
+       # import pdb; pdb.set_trace()
+        if head.next is None:
+            head = head.next
+            break
+       
+        elif head.next.value == val_to_remove:
             head = head.next.next
         else:
             head = head.next 
 
-a = Link(2, Link(3, Link(5)))
-k = 1
+a = Link(1)
+b = Link(2)
+c = Link(3)
+d = Link(4)
+a.next = b
+b.next = c
+c.next = d 
 
-#print(removeKthNodeFromEnd(a, k))
-print(a)    
+k = 2
+
+update = removeKthNodeFromEnd(a, k)
+
+while update is not None:
+    print(update.value)
+    update = update.next
+  
