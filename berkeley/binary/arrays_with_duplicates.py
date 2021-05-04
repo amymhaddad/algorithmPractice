@@ -2,9 +2,10 @@
 Given an array w/dups, find the index of the first occurance of the given
 target
 """
-arr = [1, 2, 3, 4, 4, 4]
-target = 9
-
+# arr = [1, 1, 2, 3, 4, 4, 4]
+#
+# target = 1 
+#
 def get_first_index(arr, target):
     low = 0 
     high = len(arr)
@@ -17,13 +18,17 @@ def get_first_index(arr, target):
         else:
             low = mid 
     print(low, high, mid)
-    if low == mid:
-        return high
-    if mid > low:
-        return low
-    return -1
 
-print(get_first_index(arr, target))
+    if high >= len(arr):
+        return -1
+    
+    elif low == mid:
+        return high
+
+    elif low < mid:
+        return low
+
+#print(get_first_index(arr, target))
 
 
 """
