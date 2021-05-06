@@ -22,47 +22,13 @@ def tandem(red, blue, fastest):
     return find_min_speeds(red, blue)
 
 def find_max_speeds(red, blue):
+    total = 0 
     red.sort(reverse=True)
-    blue.sort(reverse=True)
-
-    totals = []
-    i = 0
-    #Why if I extract out the logic into a var name, the program breaks on the 
-    #second check for min speeds? BUT if I hard code the logic, it works?
-    #speeds_needed = len(totals) < len(red)
-    
-    while len(totals) < len(red):
-        max_val = max(red[i], blue[i])
-        if len(totals) < len(red):
-            totals.append(max_val)
-
-        min_val = min(red[i], blue[i])
-        if len(totals) < len(red):
-            totals.append(min_val)
-        i += 1     
-    return sum(totals)
-
-def find_min_speeds(red, blue): 
-    red.sort()
     blue.sort()
 
-    totals = []
-    i = 0
-    while len(totals) < len(red):
-        min_val = min(red[i], blue[i])
-        if len(totals) < len(red):
-            totals.append(min_val)
+    for i in range(len(red)):
+        max_speed = max(red[i], blue[i])
+        total += max_speed
+    return total
 
-        max_val = max(red[i], blue[i])
-        if len(totals) < len(red):
-            totals.append(max_val)
-        i += 1     
-    return sum(totals)
-
-
-
-
-
-
-
-
+print(find_max_speeds(red, blue))
