@@ -21,23 +21,24 @@ def v2_tandem(red, blue, fastest):
     blue.sort(reverse=True)
 
     totals = []
-    #start_val = max(red[0], blue[0])
-    #totals.append(start_val)
    
     i = 0
+    #Why if I extract out the logic into a var name, the program breaks on the 
+    #second check for min speeds? BUT if I hard code the logic, it works?
+    #speeds_needed = len(totals) < len(red)
+    
     while len(totals) < len(red):
-       # import pdb; pdb.set_trace()
         max_val = max(red[i], blue[i])
+        if len(totals) < len(red):
+            totals.append(max_val)
+
         min_val = min(red[i], blue[i])
-        totals.append(max_val)
-        if len(totals) <= len(red):
+        if len(totals) < len(red):
             totals.append(min_val)
-        else:
-            break
-        i += 1
+        i += 1     
 
 
-    return totals
+    return sum(totals)
 
 
 print(v2_tandem(red, blue, fastest))
