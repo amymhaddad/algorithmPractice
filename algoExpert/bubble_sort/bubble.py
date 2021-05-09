@@ -21,20 +21,22 @@ def sort_array(array):
 #print(sort_array(array))
 
 def bubbleSort(array):
-    swap = 0 
-    next_num = 1 
+    array_length = len(array)
 
-    while len(array) > 1:
-        for i in range(len(array)):
-            if array[i] > array[next_num]:
+    while array_length >= 0:
+        swap = 0 
+        next_num = 1 
+        first_num = 0
+        while next_num <= len(array) -1: 
+            if array[first_num] > array[next_num]:
                 swap += 1
-                array[i], array[next_num] = array[next_num], array[i]
-                next_num += 1
-            else:
-                next_num += 1
+                array[first_num], array[next_num] = array[next_num], array[first_num]
+            next_num += 1
+            first_num += 1
         if swap == 0:
             return array
-        array = array[:len(array)-1]
-        swap = 0
+        array_length -= 1
+    return array
 
 print(bubbleSort(array))
+
