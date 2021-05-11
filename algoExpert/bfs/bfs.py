@@ -4,31 +4,24 @@ https://www.algoexpert.io/questions/Breadth-first%20Search
 
 from collections import deque
 
-tree = {
-   1: [3, 4, 7],
-   2: [],
-   3: [2],
-   4: [6],
-   5: [],
-   6: [5],
-   7: [],
-}
 
-root = 1
+class Node:
+    def __init__(self, name):
+        self.children = []
+        self.name = name
 
+    def addChild(self, name):
+        self.children.append(Node(name))
+        return self
 
-def bfs(tree, root):
+    def breadthFirstSearch(self, array):
 
-    que = deque()
-    que.append(root)
-    results = []    
+        que = deque()
+        que.append(self)
 
-    while que:
-        item = que.popleft()
-        results.append(item)
-
-        for connection in tree[item]:
-            que.append(connection)
-    return results
-
-print(bfs(tree, root))
+        while que:
+            current = que.popleft()
+            array.append(current.name)
+            for child in current.children:
+                que.append(child)
+        return array
