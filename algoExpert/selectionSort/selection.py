@@ -2,29 +2,35 @@
 https://www.algoexpert.io/questions/Selection%20Sort
 """
 
-def smallest_index(array):
-    smallest = 0 
-
-    for i in range(len(array[1:])):
-        if array[i] < array[smallest]:
-            smallest = i
-    return smallest
-
-
-
+# Version 1
 def selection(arr):
-    j = 0
+    sm_index = 0
 
-    while j < len(arr):
-
-        for i, num in enumerate(range(len(arr)), 1):
-            print(i)
-            if arr[i] < arr[j]:
-                continue
-            elif arr[i] > arr[j]:
-                arr[j], arr[i] = arr[i], arr[j]
-                j += 1
-                break
-
+    while sm_index < len(arr) - 1:
+        curr_pointer = sm_index
+        for i, next_num in enumerate(arr[sm_index + 1 :], sm_index + 1):
+            if next_num < arr[curr_pointer]:
+                curr_pointer = i
+        arr[sm_index], arr[curr_pointer] = arr[curr_pointer], arr[sm_index]
+        sm_index += 1
     return arr
-print(selection([4, 2, 5, 1]))
+
+
+# Version 2
+def selectionSort(arr):
+    curr_index = 0
+
+    while curr_index < len(arr) - 1:
+
+        sm_index = curr_index
+
+        for i in range(curr_index + 1, len(arr)):
+            if arr[i] < arr[sm_index]:
+                sm_index = i
+        swap(curr_index, sm_index, arr)
+        curr_index += 1
+    return arr
+
+
+def swap(curr_index, sm_index, arr):
+    arr[curr_index], arr[sm_index] = arr[sm_index], arr[curr_index]
