@@ -5,8 +5,7 @@ https://www.algoexpert.io/questions/Task%20Assignment
 
 
 def task_assignment(k, tasks):
-    original = {i : duration for i, duration in enumerate(tasks)}
-   # {0: 1, 1: 3, 2: 5, 3: 3, 4: 1, 5: 4}
+    task_index = {i : duration for i, duration in enumerate(tasks)}
 
     tasks.sort()
     
@@ -14,20 +13,31 @@ def task_assignment(k, tasks):
     upper = len(tasks) -1
 
     task_assignments = []
-    #[[1, 4], [3, 1], [5, 3]]
     
     for i in range(k):
-#        import pdb; pdb.set_trace() 
-            
-        task_assignments.extend([[original[lower], original[upper]]])
+        task_assignments.append(tasks[lower])
+        task_assignments.append(tasks[upper])
+        #import pdb; pdb.set_trace()
         lower += 1
         upper -= 1
-    return task_assignments
+    return get_indices(task_assignments, task_index)
+
+
+def get_indices(task_assignments, task_index):
+    indices = []
+    #import pdb; pdb.set_trace()
+    
+    for tasks in task_assignments:
+        first_task = tasks[0]
+        second_task = tasks[1]
+        indices.extend([[task_index[first_task], task_index[second_task]]])
+    return indices
+
 
 k = 3 
 tasks = [1, 3, 5, 3, 1, 4]
 
 print(task_assignment(k, tasks))
 
-#Get the original indexes from the tasks array that are stored in original 
-#and insert each original index into the task_assignment 
+#Get the task_index indexes from the tasks array that are stored in original 
+#and insert each task_index index into the task_assignment 
