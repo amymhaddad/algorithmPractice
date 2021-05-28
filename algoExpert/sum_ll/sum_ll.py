@@ -2,27 +2,32 @@
 https://www.algoexpert.io/questions/Sum%20of%20Linked%20Lists
 """
 
-class LinkedList:   
-    def __init__(self, value):
+class LinkedList:
+    def __init__(self, value, next=None):
         self.value = value
-        self.next = None
+        self.next = next
+
+
 
 def sumOfLinkedLists(linkedListOne, linkedListTwo):
     linked1_ints = get_digits(linkedListOne)
     linked2_ints = get_digits(linkedListTwo)
     sum_of_lists = linked1_ints + linked2_ints
 
-    new_list = LinkedList(sum_of_lists % 10)
-    sum_of_lists = sum_of_lists // 10
+    num = reverse_digits([d for d in str(sum_of_lists)])
+    return store_digits(num)
 
-    while sum_of_lists is not None:
-        last_digit = sum_of_lists % 10 
-        new_list.value, new_list.next = last_digit, new_list(new_list.first, ())
-        sum_of_lists = sum_of_lists // 10
+def store_digits(num):
 
+    new_list = LinkedList(num % 10)
+    num //= 10
+
+    while num > 0:
+
+        last_digit = num % 10 
+        new_list.value, new_list.next = last_digit, LinkedList(new_list.value, new_list.next)
+        num //= 10
     return new_list
-    
-
 
 
 def get_digits(linked_list):
@@ -46,9 +51,3 @@ def reverse_digits(digits):
     return int("".join(digits))
 
 
-nums = 123
-
-while nums > 0:
-    print("here")
-
-    nums = nums // 10
