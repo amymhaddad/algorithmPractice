@@ -1,52 +1,30 @@
 """
 https://leetcode.com/explore/learn/card/introduction-to-data-structure-binary-search-tree/141/basic-operations-in-a-bst/1003/
 """
-class BST:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
-    def insertion_bst(self, value):
-        #Start at the root node BUT wnat to keep track of where we are at 
-        current = self
+#Iterative solution
+class Solution:
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        current = root
+        if current is None:
+            return TreeNode(val)
         
         while True:
-            #I can do the checks right here -- IF this is cond is T, then do the check right here
-            if current.value <= value:
+            if val < current.val:
                 if current.left is None:
-                    #Create a link on the tree by creating an instance of hte BST calss 
-                    current.left = BST(value)
+                    current.left = TreeNode(val)
                     break
                 else:
                     current = current.left
             else:
                 if current.right is None:
-                    current.right = BST(value)
+                    current.right = TreeNode(val)
                     break
                 else:
                     current = current.right
-                
-        return self
-
-
-# root = TreeNode(10)
-# root.left = TreeNode(2)
-# root.right = TreeNode(14)
-# #root.left.left = TreeNode(1)
-
-
-new_value = 1
-
-
-
-
-def pre_order(x):
-    import pdb; pdb.set_trace()
-    while x:
-        print(x.val)
-        pre_order(x.left)
-        pre_order(x.right)
-
-         
-
+        return root
