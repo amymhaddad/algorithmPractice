@@ -10,21 +10,25 @@ def threeNumberSum(array, targetSum):
     second = 0
     third = len(array) -1 
     while i < len(array):
-        #import pdb; pdb.set_trace()
-        
         while second < third:
             three_num_sum = array[i] + array[second] + array[third]
-            print("total", three_num_sum)
+            if len({array[i], array[second], array[third]}) < 3:
+                second += 1
+                continue
+
             if three_num_sum == targetSum:
-                result.append([array[i], array[second], array[third]])
-                i += 1
+                new_value = sorted([array[i], array[second], array[third]])
+                if new_value not in result:
+                    result.append(new_value)
+                second = 0
+                third = len(array) -1
                 break
             elif three_num_sum < targetSum:
                 second += 1
             elif three_num_sum > targetSum:
                 third -= 1
         i += 1
-        
+    result.sort()    
     return result 
             
 
