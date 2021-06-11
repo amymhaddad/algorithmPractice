@@ -32,8 +32,6 @@ def threeNumberSum(array, targetSum):
     return result 
             
 
-array = [12, 3, 1, 2, -6, 5, -8, 6]
-targetSum = 0
 
 #print(threeNumberSum(array, targetSum))
 
@@ -52,6 +50,50 @@ def v2_three_num_sum(array, targetSum):
     results.sort()
     return results
 
-print(v2_three_num_sum(array, targetSum))
 
+
+def v3_threeNumberSum(array, targetSum):
+    numbers = {}
+    results = []
+
+    for i in range(len(array)-1):
+        first = array[i]
+        for k in range(i+1, len(array)):
+            second = array[k]
+            poss_value = targetSum - second
+            if poss_value in numbers:
+                new_value = sorted([first, second, poss_value])
+                results.append(new_value)
+            else:
+                numbers[poss_value] = True
+    results.sort()
+    return results
+              
+
+array = [12, 3, 1, 2, -6, 5, 0, -8, -1, 6, -5]
+targetSum = 0
+
+
+
+
+def threeNumberSum(array, target):
+    array.sort()
+    results = []
+
+    for i in range(len(array)-2):
+        left = i + 1
+        right = len(array) -1 
+        while left < right:
+            current_sum = array[i] + array[left] + array[right]
+            if current_sum == target:
+                results.append([array[i], array[left], array[right]])
+                left += 1
+                right -= 1       
+            elif current_sum < target:
+                left += 1
+            elif current_sum > target:
+                right -= 1
+
+    return results
+print(threeNumberSum(array, targetSum))
 
