@@ -35,4 +35,23 @@ def threeNumberSum(array, targetSum):
 array = [12, 3, 1, 2, -6, 5, -8, 6]
 targetSum = 0
 
-print(threeNumberSum(array, targetSum))
+#print(threeNumberSum(array, targetSum))
+
+def v2_three_num_sum(array, targetSum):
+    
+    results = []
+    
+    for i in range(len(array) -1):
+        first = array[i]
+        for k in range(i+1, len(array)):
+            second = array[k]
+            for l in range(k+1, len(array)):
+                third = array[l]
+                if first + second + third == targetSum:
+                    results.append(sorted([first, second, third]))
+    results.sort()
+    return results
+
+print(v2_three_num_sum(array, targetSum))
+
+
