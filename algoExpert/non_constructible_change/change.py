@@ -1,36 +1,17 @@
 
 def change(coins):
     coins.sort()
+    change = 0
 
-    change_options = []
-    total_so_far = 0
-    for i in range(len(coins)):
-        if coins[i] not in change_options:
-            change_options.append(coins[i])
+    for i, val in enumerate(coins):
+        if i == 0 and val != 1:
+            return 1
 
-        if i == len(coins) + 1:
-            break 
-        
-        next_val = total_so_far + coins[i]
-        if next_val not in change_options:
-            change_options.append(next_val)
-        total_so_far += coins[i]
-    
-    change_options.sort()
-    for i in range(len(change_options)):
-        if i == len(change_options) - 1:
-            return change_options[-1] + 1
-       
-        elif change_options[i+1] - change_options[i] > 1:
-            max_change_num = change_options[i+1]
-            break 
+        if val > change + 1:
+            return change + 1
 
-        else:
-            continue
-    print(change_options)
-    #NOW iterate through change_options and get the difference
-    #IF the diff is > 1, check if the diff is alrady in change_options
-    #If not, return the diff at that point
+        change += val
 
-coins = [5, 7, 1, 1, 2, 3, 22]
+coins = [6, 4, 5, 1, 1, 8, 9]
+
 print(change(coins))
