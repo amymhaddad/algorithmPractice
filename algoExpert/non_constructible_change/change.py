@@ -1,4 +1,3 @@
-
 def change(coins):
     coins.sort()
     change = 0
@@ -11,7 +10,4 @@ def change(coins):
             return change + 1
 
         change += val
-
-coins = [6, 4, 5, 1, 1, 8, 9]
-
-print(change(coins))
+    return change + 1
