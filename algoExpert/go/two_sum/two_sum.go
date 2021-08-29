@@ -1,9 +1,8 @@
 package main
 
-import "fmt"
-
 //TwoNumberSum takes a slice of numbers and checks of any two numbers in the
 //slice sum to the given target
+//Solution 1
 func TwoNumberSum(array []int, target int) []int {
 	for i := range array {
 		for j := range array {
@@ -16,10 +15,20 @@ func TwoNumberSum(array []int, target int) []int {
 	return []int{}
 }
 
-func main() {
-	x := []int{3, 5, -4, 8, 11, 1, -1, 6}
-	y := 10
-	z := TwoNumberSum(x, y)
-	fmt.Println(z)
+//Solution 2
+func TwoNumberSum(array []int, target int) []int {
 
+	differences := make(map[int]bool)
+	for i := range array {
+		currValue := array[i]
+		diff := target - currValue
+
+		if _, found := differences[diff]; found {
+			return []int{currValue, diff}
+		}
+
+		differences[currValue] = true
+	}
+
+	return []int{}
 }
