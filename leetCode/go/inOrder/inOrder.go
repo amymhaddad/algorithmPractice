@@ -26,23 +26,26 @@ type TreeNode struct {
 func inorderTraversal(root *TreeNode) []int {
 	//s needs to be slice of pointers to TreeNodes --> *TreeNode
 	//Appending to a slcie of pointers to TreeNodes
-	var s []int
+	var s []*TreeNode
 	var results []int
+	var val int 
 
-	for len(s) != 0 {
-		if root.Left != nil {
+	for {
+		if root != nil {
+			s = append(s, root)
 			root = root.Left
-			s = append(s, root)
-		}
-
-		results = append(results, root.Val)
-
-		if root.Right != nil {
+		} else {
+			if len(s) == 0 {
+				break
+			}
+		//	fmt.Println(s)
+			val, s = s[len(s)-1], s[:len(s)-1]
+			results = append(results, val)
 			root = root.Right
-			s = append(s, root)
 		}
 
 	}
+
 	return results
 
 }
