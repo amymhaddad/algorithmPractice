@@ -1,25 +1,39 @@
 package main
 
-import "fmt"
-
-func isValidSubsequence(array []int, sequence []int) bool {
-
-	numsWithIndexes := make(map[int]int)
-
-	for i := 0; i <= array; i++ {
-		numsWithIndexes[array[i]] = i
-	}
+//Solution 1
+func IsValidSubsequence(array []int, sequence []int) bool {
+	arrIndex := 0
+	seqIndex := 0
 
 	var validNums int
-
-	for i := 0; i <= sequence; i++ {
-		if index, found := numsWithIndexes[sequence[i]]; found && i <= index {
+	for seqIndex <= len(sequence)-1 && arrIndex <= len(array)-1 {
+		if sequence[seqIndex] == array[arrIndex] {
 			validNums++
+			arrIndex++
+			seqIndex++
+		} else if seqIndex <= arrIndex {
+			arrIndex++
+		} else {
+			break
 		}
+
 	}
 	return validNums == len(sequence)
 }
 
-func main() {
-	fmt.Println("vim-go")
+//Solution 2
+func IsValidSubsequence(array []int, sequence []int) bool {
+	var seqIndex int
+	var validNums int
+	for i := 0; i <= len(array)-1; i++ {
+		if array[i] == sequence[seqIndex] {
+			validNums++
+			seqIndex++
+			if seqIndex >= len(sequence) {
+				break
+			}
+		}
+	}
+
+	return validNums == len(sequence)
 }
