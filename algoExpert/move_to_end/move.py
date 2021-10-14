@@ -5,10 +5,11 @@ https://www.algoexpert.io/questions/Move%20Element%20To%20End
 def moveElementToEnd(array, toMove):
     array.sort()
 
-    for i, value in enumerate(array[1:], start=1):
+    for i, value in enumerate(array):
+        if i == 0:
+            continue
         if value != toMove:
-            import pdb; pdb.set_trace()
-            num = array.pop(value)
+            num = array.pop(i)
             array.insert(0, num)
             
     return array
