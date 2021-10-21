@@ -1,3 +1,5 @@
+// https://www.algoexpert.io/questions/Node%20Depths
+
 package main
 
 type BinaryTree struct {
@@ -11,8 +13,9 @@ func NodeDepths(root *BinaryTree) int {
 	currLevel := []*BinaryTree{root}
 
 	var levelDepth int
-	for len(s) > 0 {
-		levelDepth = levelDepth + 1
+
+	for len(currLevel) > 0 {
+		levelDepth++
 		nextLevel := []*BinaryTree{}
 
 		for _, node := range currLevel {
@@ -23,8 +26,7 @@ func NodeDepths(root *BinaryTree) int {
 				nextLevel = append(nextLevel, node.Right)
 			}
 		}
-
-		totalDepth := localDepth * len(nextLevel)
+		totalDepth += levelDepth * len(nextLevel)
 		currLevel = nextLevel
 	}
 	return totalDepth
