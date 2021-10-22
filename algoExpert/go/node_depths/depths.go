@@ -7,7 +7,8 @@ type BinaryTree struct {
 	Left, Right *BinaryTree
 }
 
-func NodeDepths(root *BinaryTree) int {
+//Sol: 1
+func NodeDepths_1(root *BinaryTree) int {
 	var totalDepth int
 
 	currLevel := []*BinaryTree{root}
@@ -30,4 +31,16 @@ func NodeDepths(root *BinaryTree) int {
 		currLevel = nextLevel
 	}
 	return totalDepth
+}
+
+//Sol: 2
+func NodeDepths_2(root *BinaryTree) int {
+	return calcDepth([]*BinaryTree{root}, 0)
+}
+
+func calcDepth(nodes *BinaryTree, levelDepth int) int {
+	if nodes == nil {
+		return 0
+	}
+	return levelDepth + calcDepth(nodes.Left, levelDepth+1) + calcDepth(nodes.Right, levelDepth+1)
 }
