@@ -11,19 +11,18 @@
 
 
 def move_zeros(nums):
-    nums.sort()
-
     p1 = 0
     p2 = 1
 
-    while p2 < len(nums):
-
-        while nums[p2] > 0:
+    for num in nums:
+        if p2 >= len(nums):
+            break 
+        if nums[p1] == 0 and nums[p2] > 0:
+            nums[p1], nums[p2] = nums[p2], nums[p1]
+            p1 += 1
             p2 += 1
-        nums[p1], nums[p2] = nums[p2], nums[p1]
-        p1 += 1
-        p2 += 1
-
+        elif nums[p1] == 0 and nums[p2] == 0:
+            p2 += 1
     return nums
 
-
+print(move_zeros([1,0,1]))
