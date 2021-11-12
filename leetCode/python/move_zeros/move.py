@@ -1,21 +1,29 @@
-#https://leetcode.com/problems/move-zeroes/
-
+# #https://leetcode.com/problems/move-zeroes/
+#
 # def move_zeros(nums):
-#     if len(nums) == 1:
-#         return nums
+#     nums.sort()
+#     first_num_index = 1
+#     for i, num in enumerate(nums):
+#         if num > 0:
+#             first_num_index = i
+#             break
+#     return nums[first_num_index:] + nums[:first_num_index]
 
-#     i = 0
-
-#     while i < len(nums) -1:
-#         import pdb; pdb.set_trace()
-#         if nums[i] == 0:
-#             zero = nums.pop(nums[i])
-#             nums.append(zero)
-#         else:
-#             i += 1
-#     return nums
 
 def move_zeros(nums):
+    nums.sort()
+
+    p1 = 0
+    p2 = 1
+
+    while p2 < len(nums):
+
+        while nums[p2] > 0:
+            p2 += 1
+        nums[p1], nums[p2] = nums[p2], nums[p1]
+        p1 += 1
+        p2 += 1
+
+    return nums
 
 
-print(move_zeros([0, 1, 0, 3, 12]))
