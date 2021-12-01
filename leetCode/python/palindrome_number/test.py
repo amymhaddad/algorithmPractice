@@ -8,5 +8,3 @@ def test_palindrome():
     assert isPalindrome(10) == False
     assert isPalindrome(-101) == False
     assert isPalindrome(000) == True
-
-
