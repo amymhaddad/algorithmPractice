@@ -11,19 +11,22 @@ type BinaryTree struct {
 
 func BranchSums(root *BinaryTree) []int {
 	var result []int
-	helper(root, 0, result)
+	helper(root, 0, &result)
 	return result
 }
 
-func helper(root *BinaryTree, count int, result []int) {
+func helper(root *BinaryTree, count int, result *[]int) {
+
 	if root == nil {
-		return result
+		return
 	}
 
 	newCount := count + root.Value
 
+	if root.Left == nil && root.Right == nil {
+		*result = append(*result, newCount)
+		return
+	}
 	helper(root.Left, newCount, result)
-	result = append(result, newCount)
 	helper(root.Right, newCount, result)
-
 }
